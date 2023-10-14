@@ -9,7 +9,7 @@ const creds = reactive({
 const handleSignUp = async () => {
   try {
     await signUp(creds.email, creds.password);
-    alert('Signed up');
+    navigateTo('/');
   } catch (e) {
     console.error(e);
     alert('Error while signing up');

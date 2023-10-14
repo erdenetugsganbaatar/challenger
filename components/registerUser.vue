@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const { registerUser } = useFirebaseAuth();
+const { signUp } = useFirebaseAuth();
 
 const creds = reactive({
   email: '',
   password: '',
 });
 
-const handleSignup = async () => {
+const handleSignUp = async () => {
   try {
-    await registerUser(creds.email, creds.password);
+    await signUp(creds.email, creds.password);
     alert('Signed up');
   } catch (e) {
     console.error(e);
@@ -19,10 +19,8 @@ const handleSignup = async () => {
 
 <template>
   <div>
-    <div>
-      <input v-model="creds.email" type="text" />
-      <input v-model="creds.password" type="password" />
-      <button @click="handleSignup">Sign up</button>
-    </div>
+    <input autocomplete="email" v-model="creds.email" type="text" />
+    <input autocomplete="new-password" v-model="creds.password" type="password" />
+    <button @click="handleSignUp">Sign up</button>
   </div>
 </template>

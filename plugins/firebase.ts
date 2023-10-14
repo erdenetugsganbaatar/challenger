@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 export default defineNuxtPlugin({
@@ -19,6 +19,15 @@ export default defineNuxtPlugin({
 
     const auth = getAuth(app);
     const firestore = getFirestore(app);
+
+    onAuthStateChanged(auth, firebaseUser => {
+      const { user } = useFirebaseAuth();
+      if (firebaseUser) {
+        user.value = firebaseUser;
+      } else {
+        user.value = null;
+      }
+    });
 
     return {
       provide: {

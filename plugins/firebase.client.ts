@@ -21,6 +21,7 @@ export default defineNuxtPlugin({
     const firestore = getFirestore(app);
 
     onAuthStateChanged(auth, firebaseUser => {
+      console.log(firebaseUser);
       const { user } = useFirebaseAuth();
       if (firebaseUser) {
         user.value = firebaseUser;
